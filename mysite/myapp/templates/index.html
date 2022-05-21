@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<h2>Home</h2>
+<div>
+    <table  style="width:100%">
+
+     <form method="POST">
+         {% csrf_token %}
+        <tr>
+
+            <th>Roll No.</th>
+            <th>Name</th>
+            <th>Father Name</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Mobile No.</th>
+            <th>Course</th>
+            <th>Address</th>
+
+        </tr>
+         {%for data1 in data2 %}
+        <tr>
+            <td>{{ data1.roll_no}}</td>
+            <td>{{ data1.name}}</td>
+            <td>{{ data1.father_name}}</td>
+            <td>{{ data1.gender }}</td>
+            <td>{{ data1.age }}</td>
+            <td>{{ data1.mobile_no }}</td>
+            <td>{{ data1.course}}</td>
+            <td>{{ data1.address }}</td>
+             <!--<td><a href="/edit/{{ data1.id }}" style="color: #187b1c;">Edit</a> |-->
+            <!--<a href="/delete/{{ data1.id }}" style="color: #c74747;" onclick="javascript:return ConfirmDelete()">Delete</a></td>-->
+        <!--</tr>-->
+         {% endfor   %}
+
+        </form>
+    </table>
+</div>
+<div>
+
+<button><a href="/studentcreate">Create New Student</a></button>
+<button><a href="/courseadd">Add Course</a></button>
+<button><a href="/fee">Pay Fee</a></button>
+    <br>
+<a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a><br>
+    {% if user.is_authenticated %}
+             <p class="display-4">Hello, {{ user.username }}</p>
+	{% else %}
+
+             <a class="lead" href="{% url 'login' %}">Log in</a>
+	{% endif %}
+  <p><strong>-- OR --</strong></p>
+
+  <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+
+
+</div>
+</body>
+</html>
